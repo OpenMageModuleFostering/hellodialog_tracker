@@ -73,7 +73,9 @@
 				// ... add hardcoded required field: email
 				$mapping[] = array('magento' => 'email', 'hellodialog' => 'email');
 				foreach ($mapping as $map) {
-					$contact[$map['hellodialog']] = $this->_value($map['magento']);
+					if (isset($map['hellodialog'])) {
+						$contact[$map['hellodialog']] = $this->_value($map['magento']);
+					}
 				}
 			}
 
@@ -243,34 +245,39 @@
 			
 			if (Mage::getStoreConfig('hellodialog/general/ecommerce')) {
 
+				Mage::log("eCommerce plugin enabled: posting order to Hellodialog", null, 'hellodialog.log');
+
 				//HD Ecommerce
 				$HDEcommerce = new HDEcommerce();
-				$HDEcommerce->addOrder($this->_createHellodialogOrder(), $this->_value('email'));
-				$HDEcommerce->setContactData($contact, $this->_value('email'), true);
+
+				try {
+					$HDEcommerce->addOrder($this->_createHellodialogOrder(), $this->_value('email'));
+					$HDEcommerce->setContactData($contact, $this->_value('email'), true);
+				} catch (Exception $e) {
+					Mage::log("... ERROR setting up HDEcommerce class with order and contact data (".$e->getMessage().")", null, 'hellodialog.log');
+					return;
+				}
 
 				// retrieve all items in this order
 				$items = $this->_order->getAllVisibleItems();
 
 				foreach ($items as $item){
-					 $HDEcommerce->addProduct(array(
-						'product_code' => $item->getSku(),
-						'name'         => $item->getName(),
-						'quantity'     => $item->getQty(),
-						'price'        => $item->getPrice(),
-						'discount'     => $item->getDiscountAmount(),
-					), $this->_value('id'));
+					try {
+						 $HDEcommerce->addProduct(array(
+							'product_code' => $item->getSku(),
+							'name'         => $item->getName(),
+							'quantity'     => $item->getQty(),
+							'price'        => $item->getPrice(),
+							'discount'     => $item->getDiscountAmount(),
+						), $this->_value('id'));
+					} catch (Exception $e) {
+						Mage::log("... SKIPPING product because it throws an error (".$e->getMessage().")", null, 'hellodialog.log');
+					}
 				}
 
-				$success = true;
 				try {
-					Mage::log("eCommerce plugin enabled: posting order to Hellodialog", null, 'hellodialog.log');
 					$ordersResult = $HDEcommerce->postOrders();
-				} catch (Exception $e) {
-					$success = false;
-					Mage::log("... FAILED (error while creating order: duplicate or other error)", null, 'hellodialog.log');
-				}
 
-				if ($success) {
 					if (is_object($ordersResult) && isset($ordersResult->result) && is_object($ordersResult->result) && isset($ordersResult->result->code)) {
 						if ($ordersResult->result->code == '200') {
 							Mage::log("... OK (Orders created)", null, 'hellodialog.log');
@@ -280,8 +287,9 @@
 					} else {
 						Mage::log("... FAILED (unexpected response)", null, 'hellodialog.log');
 					}
+				} catch (Exception $e) {
+					Mage::log("... FAILED (error while creating order: duplicate or other error)", null, 'hellodialog.log');
 				}
-
 			} else {
 				Mage::log("eCommerce plugin disabled: not posting order to Hellodialog", null, 'hellodialog.log');
 			}

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Hellodialog_Tracker</name>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <stability>stable</stability>
     <license uri="http://www.gnu.org/copyleft/gpl.html">GNU General Public License (GPL)</license>
     <channel>community</channel>
@@ -13,16 +13,18 @@ Optionally use the Hellodialog eCommerce Plugin to target groups of customers ba
     <notes>This plugin connects your Magento shop to Hellodialog. Your customers will automatically be subscribed to your Hellodialog account.&#xD;
 Optionally use the Hellodialog eCommerce Plugin to target groups of customers based on their purchase history.&#xD;
 &#xD;
+Release 2.0.1 contains a number of fixes, as well as an update to the underlying API domain used.&#xD;
+&#xD;
 Release 2.0.0 was completely rebuilt from scratch. The most important changes:&#xD;
 - Made the importing of orders with customers optional&#xD;
 - Fieldmapping: specify which Magento fields to import into Hellodialog&#xD;
 - Synchronize history of all completed orders&#xD;
 &#xD;
-For any questions or when you need help installing our extension, please contact us at support@hellodialog.com or call us +31 23 53 22 608.</notes>
+For any questions or when you need help installing our extension, please contact us at support@hellodialog.com or call us at +31 23 53 22 608.</notes>
     <authors><author><name>Maarten van Schalkwijk</name><user>Hellodialog</user><email>maarten@hellodialog.com</email></author></authors>
-    <date>2015-03-06</date>
-    <time>14:02:41</time>
-    <contents><target name="magecommunity"><dir name="Hellodialog"><dir name="Tracker"><dir name="Block"><file name="Cronprogress.php" hash="48122f9d7a8b3f01224a0750b68ff67e"/><file name="Fieldmapping.php" hash="1cd6e6e1b7e473cf8649f567f5e04f90"/><file name="Syncstatus.php" hash="88c1fd5d5e4dc4a7cb0c226a2ba9c958"/><file name="Validator.php" hash="beb1c17c3817b44e1078b1bec0d8ceef"/></dir><dir name="Model"><file name="APIKeyValidator.php" hash="ef82d2001f97ce4203d5717c770ddd82"/><file name="Cron.php" hash="b80aaa48269070e2d35738c80a95d2ee"/><file name="HDApi.php" hash="b65fb0c133b6e44b4732851f58d00beb"/><file name="HDEcommerce.php" hash="cb58ce227b74924968f81945fe4a2c82"/><file name="Observer.php" hash="3e8aee9152e074503b3dd281546dd6ef"/><file name="SubscribeOptions.php" hash="dc700ecb157f1ead9300eb441e0d190d"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="FormController.php" hash="74e25b46ad18817d305550bb82aacc26"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="12c5102eab80f7c17d0032a50cf96478"/><file name="config.xml" hash="37def834bedbf222dbb3d97f8aaaa889"/><file name="system.xml" hash="32aba8e356d77ccfb249e593b641f32e"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Hellodialog_Tracker.xml" hash="7d32b9c31228e1c1709f05642bed18d2"/></dir></target></contents>
+    <date>2015-12-07</date>
+    <time>10:40:11</time>
+    <contents><target name="magecommunity"><dir name="Hellodialog"><dir name="Tracker"><dir name="Block"><file name="Cronprogress.php" hash="48122f9d7a8b3f01224a0750b68ff67e"/><file name="Fieldmapping.php" hash="1cd6e6e1b7e473cf8649f567f5e04f90"/><file name="Syncstatus.php" hash="88c1fd5d5e4dc4a7cb0c226a2ba9c958"/><file name="Validator.php" hash="beb1c17c3817b44e1078b1bec0d8ceef"/></dir><dir name="Model"><file name="APIKeyValidator.php" hash="ef82d2001f97ce4203d5717c770ddd82"/><file name="Cron.php" hash="b80aaa48269070e2d35738c80a95d2ee"/><file name="HDApi.php" hash="29b9432cb6fcb9ea9cf4a4244aef569f"/><file name="HDEcommerce.php" hash="cb58ce227b74924968f81945fe4a2c82"/><file name="Observer.php" hash="b853135ae79d2a3c92eebc45cd23d359"/><file name="SubscribeOptions.php" hash="dc700ecb157f1ead9300eb441e0d190d"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="FormController.php" hash="74e25b46ad18817d305550bb82aacc26"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="12c5102eab80f7c17d0032a50cf96478"/><file name="config.xml" hash="743d53a013b7f869f941b0dae3bb8063"/><file name="system.xml" hash="0ac14dc343ff60517301c714146ce732"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Hellodialog_Tracker.xml" hash="7d32b9c31228e1c1709f05642bed18d2"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php><extension><name>curl</name><min/><max/></extension></required></dependencies>
 </package>

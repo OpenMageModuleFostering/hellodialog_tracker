@@ -91,7 +91,7 @@ class HDApi {
 
 		$curl = curl_init();
 	
-		$requestUrl = 'https://app.klantenbinder2.nl/api/'.$this->_url;
+		$requestUrl = 'https://app.hellodialog.com/api/'.$this->_url;
 
 		if(!is_null($id)){
 			$requestUrl .= '/'.$id;
