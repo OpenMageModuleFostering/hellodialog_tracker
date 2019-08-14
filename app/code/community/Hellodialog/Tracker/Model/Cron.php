@@ -4,8 +4,11 @@
 		 // 2.400 per day (job every 15 minutes), this ensures we stay within Google's gecode limits (2500/24hrs)
 		private static $orders_per_job = 25;
 
+		// 9600 per day (job every 15 minutes) if we're not using Google's geocode
+		private static $orders_per_job_sans_geocoding = 100;
+
 		public static function orders_per_job() {
-			return self::$orders_per_job;
+			return Mage::getStoreConfig('hellodialog/general/geocode') ? self::$orders_per_job : self::$orders_per_job_sans_geocoding;
 		}
 
 		public static function current_page() {
@@ -27,7 +30,6 @@
 			}
 
 			// configuration
-			$orders_per_job = self::orders_per_job();
 			$current_page   = self::current_page();
 			$hd_observer    = new HelloDialog_Tracker_Model_Observer();
 			$total          = $orders = Mage::getModel('sales/order')->getCollection()
@@ -59,7 +61,9 @@
 
 			foreach ($orders as $order) {
 				self::log("- processing order ".$order->getIncrementId()." (".$order->getCustomerName().")");
+				$start = microtime(true);
 				$hd_observer->sync_order($order);
+				self::log("- order #{$order->getIncrementId()} processed in " . round(((microtime(true) - $start) * 1000), 2).'ms');
 			}
 
 			// update current page in config

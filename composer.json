@@ -1,7 +1,7 @@
 {
     "name": "OpenMageModuleFostering/Hellodialog_Tracker",
     "type": "magento-module",
-    "license": "GNU-General-Public-License-(GPL)",
+    "license": "GPL-(GNU-General-Public-License)",
     "homepage": "",
     "description": "Connect your Magento shop to Hellodialog.",
     "authors": [
