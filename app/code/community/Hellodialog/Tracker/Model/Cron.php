@@ -21,7 +21,7 @@
 				require_once "Observer.php";
 			}
 
-			$configurator = new Mage_Core_Model_Config();
+			$configurator = Mage::getConfig();
 			$configurator->saveConfig('hellodialog/synchronize_history/cron_lastrun', time(), 'default', 0);
 
 			// check if this job is enabled in the first place
@@ -39,11 +39,6 @@
 			// mark start
 			if ($current_page == 0) {
 				$configurator->saveConfig('hellodialog/synchronize_history/cron_started', time(), 'default', 0);
-			}
-
-			// check if done
-			if (self::check_if_done($configurator, $total, $current_page)) {
-				return;
 			}
 
 			// process orders
@@ -67,10 +62,9 @@
 			}
 
 			// update current page in config
-			if (self::check_if_done($configurator, $total, $current_page)) {
-				return;
-			}
+			self::check_if_done($configurator, $total, $current_page);
 			$configurator->saveConfig('hellodialog/synchronize_history/current_page', $current_page, 'default', 0);
+			Mage::app()->getConfig()->reinit();
 		}
 
 		private static function log($l) {
@@ -81,8 +75,6 @@
 			if ($total <= $page * self::orders_per_job()) {
 				self::log("Hellodialog Order Sync >> DONE <<");
 				$configurator->saveConfig('hellodialog/synchronize_history/enabled', 0, 'default', 0);
-				return true;
 			}
-			return false;
 		}
 	}
