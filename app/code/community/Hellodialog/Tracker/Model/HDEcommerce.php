@@ -251,15 +251,17 @@ class HDEcommerce {
 
 		foreach($this->_orders as $key => &$order){
 			// If there's no contact for this order, skip and remove it
-			if(!($contact = $this->_contacts[$order['contact_email']])){
+			if(!isset($this->_contacts[$order['contact_email']])){
 				$this->_unsentOrders[] = $order;
 				unset($this->_orders[$key]);
 				continue;
-			}
+			} else {
+				$contact = $this->_contacts[$order['contact_email']];
 
-			// Link contact to order and unset email from order
-			$order['contact'] = $contact->id;
-			unset($order['contact_email']);
+				// Link contact to order and unset email from order
+				$order['contact'] = $contact->id;
+				unset($order['contact_email']);
+			}
 		}
 	}
 

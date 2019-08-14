@@ -23,7 +23,7 @@ class Hellodialog_Tracker_Block_Syncstatus extends Mage_Adminhtml_Block_System_C
 
 			$total = Mage::getModel('sales/order')->getCollection()
 					->addFieldToFilter('status', 'complete')
-					->count();
+					->getSize();
 
 			$perc = round(100 * $processed / $total);
 

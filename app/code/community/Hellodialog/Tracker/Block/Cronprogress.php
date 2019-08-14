@@ -6,7 +6,7 @@ class Hellodialog_Tracker_Block_Cronprogress extends Mage_Adminhtml_Block_System
 	{
 		$total = Mage::getModel('sales/order')->getCollection()
 				->addFieldToFilter('status', 'complete')
-				->count();
+				->getSize();
 
 		$total_pages = ceil($total / Hellodialog_Tracker_Model_Cron::orders_per_job());
 

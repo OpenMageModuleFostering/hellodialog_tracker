@@ -32,7 +32,7 @@
 			$hd_observer    = new HelloDialog_Tracker_Model_Observer();
 			$total          = $orders = Mage::getModel('sales/order')->getCollection()
 										->addFieldToFilter('status', 'complete')
-										->count();
+										->getSize();
 
 			// mark start
 			if ($current_page == 0) {
