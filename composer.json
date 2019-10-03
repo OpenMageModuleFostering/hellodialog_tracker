@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Hellodialog_Tracker",
+    "name": "OpenMageModuleFostering\/Hellodialog_Tracker",
     "type": "magento-module",
     "license": "GPL-(GNU-General-Public-License)",
     "homepage": "",
     "description": "Connect your Magento shop to Hellodialog.",
     "authors": [
-    {
-        "name": "Maarten van Schalkwijk",
-        "email": "maarten@hellodialog.com"
-    }
-],
+        {
+            "name": "Maarten van Schalkwijk",
+            "email": "maarten@hellodialog.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
